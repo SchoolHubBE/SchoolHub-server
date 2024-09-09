@@ -1,4 +1,3 @@
-
 namespace SchoolHub_server
 {
     public class Program
