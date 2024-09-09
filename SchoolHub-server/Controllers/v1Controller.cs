@@ -1,24 +1,20 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SchoolHub_server.Controllers
+namespace SchoolHub_server.Controllers;
+
+[ApiController]
+[Route("v1")]
+public class v1Controller : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class v1Controller : ControllerBase
+    [HttpGet]
+    public IActionResult Get()
     {
-        private readonly ILogger<v1Controller> _logger;
-
-        public v1Controller(ILogger<v1Controller> logger)
+        var version = Environment.GetEnvironmentVariable("SCHOOLHUB_VERSION");
+        if (version == null)
         {
-            _logger = logger;
+            return BadRequest(new { status = "ERROR", message = "SCHOOLHUB_VERSION environment variable not set" });
         }
 
-        [HttpGet(Name = "GetV1")]
-        public v1 Get()
-        {
-            var result = new List<v1>();
-            result.Add(new v1());
-            return result.FirstOrDefault();
-        }
+        return Ok(new { status = "OK", version });
     }
 }

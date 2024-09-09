@@ -1,6 +1,6 @@
 namespace SchoolHub_server
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -9,6 +9,7 @@ namespace SchoolHub_server
             // Add services to the container.
 
             builder.Services.AddControllers();
+            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -22,7 +23,12 @@ namespace SchoolHub_server
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
+
+            app.UseCors(options => options
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthorization();
 

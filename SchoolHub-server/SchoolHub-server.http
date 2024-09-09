@@ -1,6 +1,6 @@
 @SchoolHub_server_HostAddress = http://localhost:5107
 
-GET {{SchoolHub_server_HostAddress}}/V1/
+GET {{SchoolHub_server_HostAddress}}/v1
 Accept: application/json
 
 ###
