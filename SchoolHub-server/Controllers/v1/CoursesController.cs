@@ -6,16 +6,24 @@ namespace SchoolHub_server.Controllers.v1;
 [Route("v1/courses")]
 public class CoursesController : ControllerBase
 {
+    private static readonly Course[] PlaceHolderCourses =
+    [
+        new() { Id = 1, Name = "Math" },
+        new() { Id = 2, Name = "Science" },
+        new() { Id = 3, Name = "English" },
+        new() { Id = 4, Name = "History" }
+    ];
+    
     [HttpGet]
     public IEnumerable<Course> Get()
     {
-        return new[]
-        {
-            new Course { Id = 1, Name = "Math" },
-            new Course { Id = 2, Name = "Science" },
-            new Course { Id = 3, Name = "English" },
-            new Course { Id = 4, Name = "History" },
-        };
+        return PlaceHolderCourses;
+    }
+
+    [HttpGet("{courseId}/{topicName}")]
+    public Course? GetCourse(int courseId, string topicName)
+    {
+        return PlaceHolderCourses.FirstOrDefault(c => c.Id == courseId);
     }
 }
 
