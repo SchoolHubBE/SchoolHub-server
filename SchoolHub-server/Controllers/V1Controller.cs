@@ -4,7 +4,7 @@ namespace SchoolHub_server.Controllers;
 
 [ApiController]
 [Route("v1")]
-public class v1Controller : ControllerBase
+public class V1Controller : ControllerBase
 {
     [HttpGet]
     public IActionResult Get()
