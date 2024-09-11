@@ -1,12 +1,10 @@
-using DotNetEnv;
-
 namespace SchoolHub_server
 {
     public static class Program
     {
         public static void Main(string[] args)
         {
-            Env.Load("../.env");
+            DotNetEnv.Env.TraversePath().Load();
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
