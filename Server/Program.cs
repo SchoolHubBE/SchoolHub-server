@@ -33,7 +33,7 @@ namespace SchoolHub_server
             app.MapControllers();
             
             // Attempt connecting to the database
-            Database.Connect();
+            Database.Client.Connect();
             
             // Run the ASP.NET 8.0 application
             app.Run();
