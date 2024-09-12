@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using SchoolHub_server.Database.Models;
 
 namespace SchoolHub_server.Database;
 
@@ -28,10 +29,14 @@ public static class Client
 
     public static void Close()
     {
-        if (_conn != null)
-        {
-            _conn.Close();
-            _conn = null;
-        }
+        if (_conn == null) return;
+        _conn.Close();
+        _conn = null;
+    }
+
+    public static void Migrate()
+    {
+        Console.WriteLine("Migrating database...");
+        UserExtensions.Migrate(Connection);
     }
 }
