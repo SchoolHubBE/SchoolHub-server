@@ -4,6 +4,7 @@ namespace SchoolHub_server.Database.Models
 {
     public struct User
     {
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
 
@@ -177,6 +178,17 @@ namespace SchoolHub_server.Database.Models
             }
 
             return null;
+        }
+        
+        public static bool RemoveUser(NpgsqlConnection connection, int id)
+        {
+            using var command = new NpgsqlCommand(@"
+            DELETE FROM users WHERE id = @id;
+            ", connection);
+
+            command.Parameters.AddWithValue("id", id);
+
+            return command.ExecuteNonQuery() == 1;
         }
     }
 }

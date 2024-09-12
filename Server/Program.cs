@@ -171,7 +171,34 @@ namespace SchoolHub_server
 
         private static void RemoveUser()
         {
-            throw new NotImplementedException();
+            Console.Write("User ID: ");
+            if (!int.TryParse(Console.ReadLine(), out var id))
+            {
+                Console.WriteLine("Invalid user ID. Please try again.");
+                return;
+            }
+
+            var user = UserExtensions.GetUserById(Database.Client.Connection, id);
+            if (user == null)
+            {
+                Console.WriteLine("User not found. Please try again.");
+                return;
+            }
+
+            Console.WriteLine($"Username: {user.Value.Username}");
+            Console.WriteLine($"First name: {user.Value.FirstName}");
+            Console.WriteLine($"Last name: {user.Value.LastName}");
+            Console.WriteLine($"Email: {user.Value.Email}");
+            Console.WriteLine($"Phone number: {user.Value.PhoneNumber}");
+            
+            Console.WriteLine("Are you sure you want to delete this user? (y/n)");
+            if (Console.ReadLine() == "y")
+            {
+                if (!UserExtensions.RemoveUser(Database.Client.Connection, user.Value.Id))
+                {
+                    Console.WriteLine("Failed to delete user. Please try again.");
+                }
+            }
         }
 
         private static void CreateCourse()
